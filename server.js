@@ -1,7 +1,18 @@
 const express = require('express');
-const app = express();
 const cors = require('cors');
 const path = require('path');
+const socket = require('socket.io');
+
+const app = express();
+const server = app.listen(process.env.PORT || 8000, () => {
+    console.log('Server is running on port: 8000');
+});
+const io = socket(server);
+
+//listen to socket
+io.on('connection', (socket) => {
+    console.log('New socket ' + socket.id);
+});
 
 //import routes
 const testimonialsRoutes = require('./routes/testimonials.routes');
@@ -26,8 +37,4 @@ app.get('*', (req, res) => {
 //wrong adress
 app.use((req, res) => {
     res.status(404).json({ message: '404 not found...' });
-});
-
-app.listen(process.env.PORT || 8000, () => {
-    console.log('Server is running on port: 8000');
 });
