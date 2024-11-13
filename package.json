@@ -4,13 +4,20 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "chai": "4.2.0",
+    "chai-http": "4.3.0",
     "cors": "^2.8.5",
     "express": "4.17.1",
+    "mocha": "6.2.1",
     "mongoose": "7.4.3",
+    "nodemon": "^3.1.7",
+    "onchange": "6.1.0",
     "socket.io": "4.7.2",
     "uuid": "^10.0.0"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon server.js",
+    "test": "NODE_ENV=test mocha \"./{,!(node_modules|client)/**/}*.test.js\"",
+    "test:watch": "onchange \"./**/*.js\" -i -k -- yarn test"
   }
 }
