@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, '/client/build')));
 const NODE_ENV = process.env.NODE_ENV;
 let dbUri = '';
 
-if(NODE_ENV === 'production') dbUri = 'mongodb+srv://webmaster:jBhRU7tR5dwQWmgr@cluster0.xzcbu.mongodb.net/NewWaveDB?retryWrites=true&w=majority&appName=Cluster0';
+if(NODE_ENV === 'production') dbUri = 'mongodb+srv://webmaster:${process.env.DB_PASS}@cluster0.xzcbu.mongodb.net/NewWaveDB?retryWrites=true&w=majority&appName=Cluster0';
 else if(NODE_ENV === 'test') dbUri = 'mongodb://0.0.0.0:27017/NewWaveDBtest';
 else dbUri = 'mongodb://0.0.0.0:27017/NewWaveDB';
 
